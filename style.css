@@ -520,10 +520,14 @@ a:active {
 5.2 Menus
 --------------------------------------------------------------*/
 .main-navigation {
+	position: relative;
 	clear: both;
 	display: block;
 	float: left;
 	width: 100%;
+	font-family: Tahoma;
+	text-transform: uppercase;
+	background: #E5CFDC
 }
 
 .main-navigation ul {
@@ -540,6 +544,10 @@ a:active {
 .main-navigation a {
 	display: block;
 	text-decoration: none;
+	padding: 1em;
+	font-size: 1.4em;
+	line-height: 1.3em;
+	color: #FFFFFF;
 }
 
 .main-navigation ul ul {
@@ -549,6 +557,7 @@ a:active {
 	top: 1.5em;
 	left: -999em;
 	z-index: 99999;
+	background: #E5CFDC;
 }
 
 .main-navigation ul ul ul {
@@ -706,6 +715,33 @@ a:active {
 .site-content:after,
 .site-footer:after {
 	clear: both;
+}
+
+/*--------------------------------------------------------------
+X.X Header
+--------------------------------------------------------------*/
+.site-branding {
+	padding: 6rem 0;
+	text-align: center;
+	background: #B28A6C
+}
+
+.site-title {
+	font-weight: 700;
+	font-size: 4.5rem;
+	text-transform: uppercase;
+	line-height: normal;
+	padding-bottom: 1rem;
+}
+
+.site-description {
+	font-weight: 100;
+	font-size: 2rem;
+}
+
+.site-title a,
+.site-description {
+	color: #fff;
 }
 
 /*--------------------------------------------------------------
@@ -883,7 +919,6 @@ object {
 	display: block;
 }
 
-
 /*
 Ain't it Sweet
 */
@@ -1021,3 +1056,4 @@ footer{
 		max-width: 100%
 	}	
 }
+
