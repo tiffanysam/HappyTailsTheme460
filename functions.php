@@ -100,11 +100,12 @@ add_action( 'widgets_init', 'happy_tails_theme_widgets_init' );
  * Enqueue scripts and styles.
  */
 //The following code pulls the stylesheet (style.css) to this page. This allows the CSS information to be located in a different area then the main php page.
-	add_action( 'wp_enqueue_scripts', 'safely_add_stylesheet' );
+	add_action( 'safely_add_stylesheet' );
 //The wp_enqueue_scripts action can be used for both CSS and Javascript files.
      function safely_add_stylesheet() {
         wp_enqueue_style( 'prefix-style', plugins_url('style.css', __FILE__) );	
         } 
+        
 function happy_tails_theme_scripts() {
 	wp_enqueue_style( 'happy-tails-theme-style', get_stylesheet_uri() );
 
