@@ -2,15 +2,18 @@
 Theme Name: Happy Tails
 Layout: Content-Sidebar
 */
-
+//*This line of code changes the site's main area background to the cream colour that we wanted. *//
 .site-main {
     background: #FCF9F3;
 }
+//*This makes the footer stretch across the entire screen and changes the colour to the brown that we wanted. It also centers the footer text. *//
 .site-footer {
     clear: both;
     width: 100%;
+    background-color: #B28A6C;
+    text-align: center;
 }
-
+//*This code makes all the below listed areas have the same commands. *//
 .entry-header,
 .entry-content,
 .entry-meta,
@@ -27,8 +30,15 @@ Layout: Content-Sidebar
 }
 
 .site-content {
+    padding-left: none;
+	padding-top: 2em;
     background: #FCF9F3;
 }
+.single .site-content,
+.page .site-content { 
+    background: #FCF9F3; 
+}
+
 .site-content .widget-area {
     width: 380px;
     float: right;
@@ -55,7 +65,7 @@ Layout: Content-Sidebar
     padding: 0 4rem;
     margin: 0 auto;
 }
-
+//*This code makes the content area responsive. It will react when the screen gets to 1160px wide. The content then will adjust to accomodate a smaller screen size. *//
 @media screen and (min-width: 1160px) {
 	.content-area {
    	 width: 100%;
@@ -65,7 +75,8 @@ Layout: Content-Sidebar
 	}
 }
 
-
+//*This code makes the side bar area responsive. Once the screen size gets to a certain specified size the sidebar will either appear on the right side of the screen(when screen is big) or will appear under the content (when screen is small). 
+This helps with readability and allows for the most important part of the website to be seen first (content). *//
 @media screen and (max-width: 1159px) {
 	.site-content .widget-area {
     	width: auto;
@@ -75,6 +86,4 @@ Layout: Content-Sidebar
 	}
 
 }
-
-
                                

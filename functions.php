@@ -6,10 +6,10 @@
  */
 
 /**
- * Set the content width based on the theme's design and stylesheet.
+ * This sets the width of the content area based on the settings from the theme's stylesheet.
  */
 if ( ! isset( $content_width ) ) {
-	$content_width = 640; /* pixels */
+	$content_width = 600; /* pixels */
 }
 
 if ( ! function_exists( 'happy_tails_theme_setup' ) ) :
@@ -46,11 +46,13 @@ function happy_tails_theme_setup() {
 	 *
 	 * @link http://codex.wordpress.org/Function_Reference/add_theme_support#Post_Thumbnails
 	 */
-	//add_theme_support( 'post-thumbnails' );
+	add_theme_support( 'post-thumbnails' );
 
-	// This theme uses wp_nav_menu() in one location.
+	// This theme uses wp_nav_menu() in one location. 
+	// This creates new custom menus in the dashboard to use in the theme.
 	register_nav_menus( array(
 		'primary' => __( 'Primary Menu', 'happy-tails-theme' ),
+		'social' => __( 'Social Menu', 'happy-tails-theme' ),
 	) );
 
 	/*
@@ -66,14 +68,14 @@ function happy_tails_theme_setup() {
 	 * See http://codex.wordpress.org/Post_Formats
 	 */
 	add_theme_support( 'post-formats', array(
-		'aside', 'image', 'video', 'quote', 'link',
+		'aside',
 	) );
 
 	// Set up the WordPress core custom background feature.
-	add_theme_support( 'custom-background', apply_filters( 'happy_tails_theme_custom_background_args', array(
-		'default-color' => 'ffffff',
-		'default-image' => '',
-	) ) );
+//	add_theme_support( 'custom-background', apply_filters( 'happy_tails_theme_custom_background_args', array(
+//		'default-color' => 'ffffff',
+//		'default-image' => '',
+//	) ) );
 }
 endif; // happy_tails_theme_setup
 add_action( 'after_setup_theme', 'happy_tails_theme_setup' );
@@ -87,7 +89,16 @@ function happy_tails_theme_widgets_init() {
 	register_sidebar( array(
 		'name'          => __( 'Sidebar', 'happy-tails-theme' ),
 		'id'            => 'sidebar-1',
-		'description'   => '',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</aside>',
+		'before_title'  => '<h1 class="widget-title">',
+		'after_title'   => '</h1>',
+	) );
+	
+	register_sidebar( array(
+		'name'          => __( 'Footer Widgets', 'happy-tails-theme' ),
+		'description'	=> __( 'Footer widgets area appears in the footer of the site.', 'happy-tails-theme' ),
+		'id'            => 'sidebar-2',
 		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
 		'after_widget'  => '</aside>',
 		'before_title'  => '<h1 class="widget-title">',
@@ -99,18 +110,23 @@ add_action( 'widgets_init', 'happy_tails_theme_widgets_init' );
 /**
  * Enqueue scripts and styles.
  */
-//The following code pulls the stylesheet (style.css) to this page. This allows the CSS information to be located in a different area then the main php page.
-	add_action( 'wp_enqueue_scripts', 'safely_add_stylesheet' );
-//The wp_enqueue_scripts action can be used for both CSS and Javascript files.
-     function safely_add_stylesheet() {
-        wp_enqueue_style( 'prefix-style', plugins_url('style.css', __FILE__) );	
-        } 
 function happy_tails_theme_scripts() {
 	wp_enqueue_style( 'happy-tails-theme-style', get_stylesheet_uri() );
 
+	wp_enqueue_style( 'happy-tails-theme-layout-style' , get_template_directory_uri() . '/layouts/content-sidebar.css');
+	
+	wp_enqueue_style( 'happy-tails-theme-google-fonts', 'http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700|Shadows+Into+Light+Two');
+	
+	wp_enqueue_style ( 'happy-tails-theme-font-awesome', 'http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' );
+	
+	wp_enqueue_script( 'happy-tails-theme-hide-search', get_template_directory_uri() . '/js/hide-search.js', array(), '20140404', true );
+	
 	wp_enqueue_script( 'happy-tails-theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
 	wp_enqueue_script( 'happy-tails-theme-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
+	
+	wp_enqueue_script( 'happy-tails-theme-masonry', get_template_directory_uri() . '/js/masonry-settings.js', array('masonry'), '20140401', true );
+
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
@@ -121,7 +137,7 @@ add_action( 'wp_enqueue_scripts', 'happy_tails_theme_scripts' );
 /**
  * Implement the Custom Header feature.
  */
-//require get_template_directory() . '/inc/custom-header.php';
+require get_template_directory() . '/inc/custom-header.php';
 
 /**
  * Custom template tags for this theme.
@@ -142,3 +158,4 @@ require get_template_directory() . '/inc/customizer.php';
  * Load Jetpack compatibility file.
  */
 require get_template_directory() . '/inc/jetpack.php';
+
